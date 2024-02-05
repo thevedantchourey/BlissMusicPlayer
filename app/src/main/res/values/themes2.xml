@@ -1,0 +1,9 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="customTheme" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:statusBarColor" tools:taregetApi="1">#EDF6F5</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="Theme2.Bliss" parent="customTheme" />
+</resources>

@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Bliss</string>
+    <string name="contentDescription">contentDescription</string>
+    <string name="head">Bliss</string>
+    <string name="song_name">Song Name</string>
+    <string name="artist">Artist</string>
+    <string name="duration">00:00</string>
+    <string name="fav">Liked</string>
+    <string name="list">PlayList</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="contentDescription2">backwardBtn</string>
+    <string name="contentDescription3">playBtn</string>
+    <string name="contentDescription4">forwardBtn</string>
+    <string name="contentDescription5">albumNow</string>
+    <string name="contentDescription7">like</string>
+    <string name="contentDescription8">repeat</string>
+    <string name="appAdId">ca-app-pub-2360133179842292~9912166929</string>
+</resources>

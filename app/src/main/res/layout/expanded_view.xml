@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#F0F0F0"
+    >
+
+    <LinearLayout
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/background_shape2"
+        tools:ignore="UselessParent"
+        android:backgroundTint="#F0F0F0"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:id="@+id/albumCover"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:contentDescription="@string/contentDescription"
+            android:background="@drawable/background_shape2"
+            android:scaleType="centerCrop"
+            android:src="@drawable/tu_chodiyona" />
+
+
+        <TextView
+            android:id="@+id/songName"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_regular"
+            style="@style/TextAppearance.Compat.Notification.Title"
+            android:text="@string/song_name"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/artist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:layout_marginStart="-230dp"
+            style="@style/TextAppearance.Compat.Notification.Line2"
+            android:fontFamily="@font/josefinsans_regular"
+            android:text="@string/artist"
+            android:textColor="#b0b0b0"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+
+        <ImageButton
+            android:id="@+id/backward2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/btn_shape"
+            android:src="@drawable/backward"
+            android:scaleType="centerCrop"
+            android:layout_marginStart="-40dp"
+            android:layout_marginTop="70dp"
+            android:contentDescription="@string/contentDescription"/>
+
+        <ImageButton
+            android:id="@+id/play"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="65dp"
+            android:background="@drawable/btn_shape"
+            android:backgroundTint="@color/black"
+            android:src="@drawable/play"
+            android:contentDescription="@string/contentDescription"/>
+
+        <ImageButton
+            android:id="@+id/forward2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="70dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/btn_shape"
+            android:src="@drawable/forward"
+            android:contentDescription="@string/contentDescription"/>
+
+<!--        <androidx.appcompat.widget.AppCompatSeekBar-->
+<!--            android:id="@+id/seeking"-->
+<!--            android:layout_marginTop="25dp"-->
+<!--            android:layout_marginStart="-2dp"-->
+<!--            android:layout_width="120dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"/>-->
+
+    </LinearLayout>
+</RelativeLayout>

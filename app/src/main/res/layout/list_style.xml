@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingTop="30dp"
+    android:paddingStart="20dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/card"
+        android:layout_width="180dp"
+        android:layout_height="200dp"
+        android:gravity="center_vertical"
+        android:background="@drawable/btn_shape3"
+        tools:ignore="UselessParent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/imageCard"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="55dp"
+            app:cardCornerRadius="60dp"
+            app:cardElevation="0dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/albumCover"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:contentDescription="@string/contentDescription"
+                android:scaleType="centerCrop"
+                android:src="@drawable/tu_chodiyona" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/songName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/song_name"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/artist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="120dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/josefinsans_regular"
+            android:gravity="center"
+            android:text="@string/artist"
+            android:textColor="#b3b3b3"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/duration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="140dp"
+            android:gravity="center"
+            android:fontFamily="@font/josefinsans_regular"
+            android:text="@string/duration"
+            android:textColor="#b3b3b3"
+            android:textSize="12sp" />
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".NowPlaying"
+    android:gravity="center_vertical"
+    android:background="#EDF6F5">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/imageCard"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="20dp"
+        app:cardCornerRadius="60dp"
+        app:cardElevation="0dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/albumCover"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:contentDescription="@string/contentDescription5"
+            android:scaleType="centerCrop"
+            android:src="@drawable/tu_chodiyona" />
+    </androidx.cardview.widget.CardView>
+
+
+    <TextView
+        android:id="@+id/songName2"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:layout_toStartOf="@+id/bar"
+        android:layout_toEndOf="@id/imageCard"
+        android:fontFamily="@font/poppins_regular"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="@string/song_name"
+        android:textColor="#FFD700"
+        android:textIsSelectable="true"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        tools:ignore="TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/artist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/imageCard"
+        android:layout_marginStart="85dp"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/josefinsans_regular"
+        android:gravity="center"
+        android:text="@string/artist"
+        android:textColor="#b3b3b3"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        tools:ignore="TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bar"
+        android:layout_marginStart="350dp"
+        android:fontFamily="@font/josefinsans_regular"
+        android:text="@string/duration"
+        android:textColor="#b3b3b3"
+        android:textSize="12sp"
+        tools:ignore="TextContrastCheck" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:id="@+id/bar"
+        >
+
+        <ImageButton
+            android:id="@+id/backward"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="15dp"
+            android:background="@drawable/btn_shape"
+            android:contentDescription="@string/contentDescription2"
+            android:src="@drawable/backward"
+            tools:ignore="TouchTargetSizeCheck,ImageContrastCheck" />
+
+        <ImageButton
+            android:id="@+id/play"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/btn_shape"
+            android:backgroundTint="#FFD700"
+            android:contentDescription="@string/contentDescription3"
+            android:src="@drawable/play"
+            tools:ignore="TouchTargetSizeCheck,ImageContrastCheck" />
+
+        <ImageButton
+            android:id="@+id/forward"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/btn_shape"
+            android:contentDescription="@string/contentDescription4"
+            android:src="@drawable/forward"
+            tools:ignore="TouchTargetSizeCheck,ImageContrastCheck" />
+
+    </LinearLayout>
+
+</RelativeLayout>

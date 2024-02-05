@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PlayerActivity"
+    android:background="#EDF6F5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:id="@+id/bar"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp">
+
+        <ImageButton
+            android:id="@+id/previous"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="30dp"
+            android:background="@drawable/btn_shape"
+            android:contentDescription="@string/contentDescription2"
+            android:src="@drawable/backarrow"
+            tools:ignore="ImageContrastCheck,DuplicateSpeakableTextCheck" />
+
+        <ImageButton
+            android:id="@+id/backward"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="85dp"
+            android:background="@drawable/btn_shape"
+            android:contentDescription="@string/contentDescription2"
+            android:src="@drawable/backward"
+            tools:ignore="ImageContrastCheck" />
+
+        <ImageButton
+            android:id="@+id/play"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/btn_shape"
+            android:backgroundTint="#FFD700"
+            android:contentDescription="@string/contentDescription3"
+            android:src="@drawable/play"
+            tools:ignore="ImageContrastCheck" />
+
+        <ImageButton
+            android:id="@+id/forward"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/btn_shape"
+            android:contentDescription="@string/contentDescription4"
+            android:src="@drawable/forward"
+            tools:ignore="ImageContrastCheck" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/songName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bar"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins_regular"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
+        android:text="@string/song_name"
+        android:textColor="#FFD700"
+        android:textIsSelectable="true"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        tools:ignore="TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/Artist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/songName"
+        android:layout_marginStart="30dp"
+        android:fontFamily="@font/josefinsans_semibold"
+        android:text="@string/artist"
+        android:textColor="#7AC2BB"
+        android:ellipsize="marquee"
+        android:maxLength="25"
+        android:maxLines="1"
+        android:textSize="16sp"
+        tools:ignore="TextContrastCheck" />
+
+
+    <ImageButton
+        android:id="@+id/liked"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_toEndOf="@+id/Artist"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="180dp"
+        android:background="@drawable/btn_shape"
+        android:contentDescription="@string/contentDescription7"
+        android:src="@drawable/like"
+        tools:ignore="TouchTargetSizeCheck,ImageContrastCheck" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cover"
+        android:layout_width="364dp"
+        android:layout_height="420dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_below="@+id/Artist"
+        app:cardElevation="0dp"
+        app:cardCornerRadius="40dp">
+
+
+        <ImageView
+            android:id="@+id/albumArt"
+            android:layout_width="364dp"
+            android:layout_height="420dp"
+            android:src="@drawable/tu_chodiyona"
+            android:scaleType="center"
+            android:contentDescription="@string/contentDescription5"
+            android:background="@drawable/background_shape" />
+
+        <ImageButton
+            android:id="@+id/repeat"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="161dp"
+            android:layout_marginStart="130dp"
+            android:background="@drawable/btn_shape2"
+            android:src="@drawable/repeatlock"
+            android:contentDescription="@string/contentDescription8"/>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/seekBar"
+        android:gravity="center_horizontal"
+        android:layout_below="@id/cover"
+        android:layout_marginTop="20dp"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/recover"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/josefinsans_regular"
+            android:text="@string/duration"
+            android:textColor="#7AC2BB"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            tools:ignore="TextContrastCheck" />
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/seeking"
+            android:thumbTint="#7AC2BB"
+            android:layout_width="274dp"
+            android:layout_height="wrap_content"
+           android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/covered"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/josefinsans_regular"
+            android:text="@string/duration"
+            android:textColor="#7AC2BB"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            tools:ignore="TextContrastCheck" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
