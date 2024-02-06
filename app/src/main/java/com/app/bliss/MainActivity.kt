@@ -5,15 +5,14 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.bliss.databinding.ActivityMainBinding
@@ -49,7 +48,6 @@ class MainActivity : AppCompatActivity() {
 
 
     @SuppressLint("NotifyDataSetChanged")
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -60,14 +58,15 @@ class MainActivity : AppCompatActivity() {
                 loadAd()
             }
 
-
             binding.shuffle.visibility = View.INVISIBLE
             audioList = getAllAudio()
+            audioList = checkPlayList(audioList)
             var rv = binding.songView
             rv.layoutManager = GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false)
             adapter = MusicPlayerAdapter(audioList, this)
             rv.adapter = adapter
             adapter.notifyDataSetChanged()
+            adapter.notifyItemChanged(audioList.size)
 
             val liked = getSharedPreferences("LIKED", MODE_PRIVATE)
             val jsonString = liked.getString("LikedSongs", null)
@@ -77,27 +76,33 @@ class MainActivity : AppCompatActivity() {
                 favList.addAll(data)
             }
 
-
-
             binding.fav.setOnClickListener{
                 if (isClicked){
-                    favList = checkPlayList(favList)
                     isClicked = false
+                    favList = checkPlayList(favList)
                     audioList = getAllAudio()
                     rv = binding.songView
                     rv.layoutManager = GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false)
                     adapter = MusicPlayerAdapter(audioList, this)
                     rv.adapter = adapter
                     adapter.notifyDataSetChanged()
+                    adapter.notifyItemChanged(audioList.size)
                     binding.shuffle.visibility = View.INVISIBLE
+                    binding.msg.isVisible = false
+                    binding.head.isVisible = true
                 }else{
-                    favList = checkPlayList(favList)
                     isClicked = true
+                    favList = checkPlayList(favList)
                     rv = binding.songView
                     rv.layoutManager = GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false)
                     adapter = MusicPlayerAdapter(favList, this)
                     rv.adapter = adapter
-                    adapter.notifyDataSetChanged()
+                    adapter.notifyItemChanged(favList.size)
+                    adapter.notifyItemRangeChanged(PlayerActivity.fIndex, favList.size)
+                    if(favList.size == 0){
+                        binding.msg.isVisible = true
+                        binding.head.isVisible = false
+                    }
                     if(favList.size>1){
                         binding.shuffle.visibility = View.VISIBLE
                         binding.shuffle.setOnClickListener{
@@ -282,7 +287,4 @@ class MainActivity : AppCompatActivity() {
             exitProcess(1)
         }
     }
-
-
-
 }

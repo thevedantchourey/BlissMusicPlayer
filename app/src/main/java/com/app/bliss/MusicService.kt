@@ -8,13 +8,10 @@ import android.graphics.BitmapFactory
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Binder
-import android.os.Build
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
-import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
-import android.support.v4.media.session.PlaybackStateCompat
 import android.text.TextUtils
 import androidx.core.app.NotificationCompat
 import com.bumptech.glide.Glide
@@ -102,47 +99,47 @@ class MusicService: Service(), AudioManager.OnAudioFocusChangeListener {
             .setOnlyAlertOnce(true)
             .build()
 
-
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
-            if (PlayerActivity.isPlaying){
-                PlayerActivity.isPlaying = false
-                mediaSession.setMetadata(
-                    MediaMetadataCompat.Builder()
-                        .putLong(
-                            MediaMetadataCompat.METADATA_KEY_DURATION,
-                            mediaPlayer!!.duration.toLong()
-                        )
-                        .build()
-                )
-                mediaSession.setPlaybackState(
-                    PlaybackStateCompat
-                        .Builder()
-                        .setState(
-                            PlaybackStateCompat.STATE_PLAYING,
-                            mediaPlayer!!.currentPosition.toLong(),
-                            0F
-                        )
-                        .setActions(PlaybackStateCompat.ACTION_SEEK_TO)
-                        .build()
-                )
-            }else{
-                PlayerActivity.isPlaying = true
-                mediaSession.setMetadata(
-                    MediaMetadataCompat.
-                    Builder()
-                        .putLong(MediaMetadataCompat.METADATA_KEY_DURATION, mediaPlayer!!.duration.toLong())
-                        .build()
-                )
-                mediaSession.setPlaybackState(PlaybackStateCompat
-                    .Builder()
-                    .setState(PlaybackStateCompat.STATE_PLAYING, mediaPlayer!!.currentPosition.toLong(), 1F)
-                    .setActions(PlaybackStateCompat.ACTION_SEEK_TO)
-                    .build()
-                )
-            }
-        }
-
         startForeground(10,notification)
+
+//        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+//            if (PlayerActivity.isPlaying){
+//                PlayerActivity.isPlaying = false
+//                mediaSession.setMetadata(
+//                    MediaMetadataCompat.Builder()
+//                        .putLong(
+//                            MediaMetadataCompat.METADATA_KEY_DURATION,
+//                            mediaPlayer!!.duration.toLong()
+//                        )
+//                        .build()
+//                )
+//                mediaSession.setPlaybackState(
+//                    PlaybackStateCompat
+//                        .Builder()
+//                        .setState(
+//                            PlaybackStateCompat.STATE_PLAYING,
+//                            mediaPlayer!!.currentPosition.toLong(),
+//                            0F
+//                        )
+//                        .setActions(PlaybackStateCompat.ACTION_SEEK_TO)
+//                        .build()
+//                )
+//            }else{
+//                PlayerActivity.isPlaying = true
+//                mediaSession.setMetadata(
+//                    MediaMetadataCompat.
+//                    Builder()
+//                        .putLong(MediaMetadataCompat.METADATA_KEY_DURATION, mediaPlayer!!.duration.toLong())
+//                        .build()
+//                )
+//                mediaSession.setPlaybackState(PlaybackStateCompat
+//                    .Builder()
+//                    .setState(PlaybackStateCompat.STATE_PLAYING, mediaPlayer!!.currentPosition.toLong(), 1F)
+//                    .setActions(PlaybackStateCompat.ACTION_SEEK_TO)
+//                    .build()
+//                )
+//            }
+//        }
+
     }
 
 
@@ -175,7 +172,6 @@ class MusicService: Service(), AudioManager.OnAudioFocusChangeListener {
 
     override fun onAudioFocusChange(focusChange: Int) {
         if (focusChange<=0){
-
             PlayerActivity.binding.play.setImageResource(R.drawable.play)
             NowPlaying.binding.play.setImageResource(R.drawable.play)
             PlayerActivity.isPlaying = false

@@ -9,43 +9,8 @@
     android:background="#7AC2BB">
 
 
-    <!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:gravity="center"-->
-<!--            android:paddingTop="15dp"-->
-<!--            android:paddingStart="30dp"-->
-<!--            android:paddingEnd="30dp"-->
-<!--            android:paddingBottom="15dp"-->
-<!--            android:background="#F0F0F0">-->
-
-<!--            <ImageButton-->
-<!--                android:layout_width="60dp"-->
-<!--                android:layout_height="60dp"-->
-<!--                android:background="@drawable/btn_shape"-->
-<!--                android:src="@drawable/heart"-->
-<!--                android:contentDescription="@string/contentDescription"/>-->
-
-<!--            <ImageButton-->
-<!--                android:layout_width="60dp"-->
-<!--                android:layout_height="60dp"-->
-<!--                android:background="@drawable/btn_shape"-->
-<!--                android:src="@drawable/home"-->
-<!--                android:layout_marginStart="85dp"-->
-<!--                android:contentDescription="@string/contentDescription"/>-->
-
-<!--            <ImageButton-->
-<!--                android:layout_width="60dp"-->
-<!--                android:layout_height="60dp"-->
-<!--                android:layout_marginStart="83dp"-->
-<!--                android:background="@drawable/btn_shape"-->
-<!--                android:src="@drawable/library"-->
-<!--                android:contentDescription="@string/contentDescription"/>-->
-
-<!--        </LinearLayout>-->
-
     <TextView
+        android:id="@+id/head"
         android:layout_width="match_parent"
         android:layout_height="170dp"
         android:layout_marginTop="30dp"
@@ -54,6 +19,24 @@
         android:text="@string/head"
         android:textColor="#EDF6F5"
         android:textSize="40sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/msg"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/conso_lab"
+        android:gravity="center"
+        android:text="@string/noneLiked"
+        android:textColor="#EDF6F5"
+        android:textSize="20sp"
+        android:visibility="invisible"
         android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

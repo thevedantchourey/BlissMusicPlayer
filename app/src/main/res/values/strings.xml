@@ -15,5 +15,6 @@
     <string name="contentDescription5">albumNow</string>
     <string name="contentDescription7">like</string>
     <string name="contentDescription8">repeat</string>
+    <string name="noneLiked">No Music is Selected as Fav</string>
     <string name="appAdId">ca-app-pub-2360133179842292~9912166929</string>
 </resources>
