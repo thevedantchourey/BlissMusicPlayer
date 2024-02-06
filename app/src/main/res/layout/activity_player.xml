@@ -100,10 +100,23 @@
         android:layout_gravity="center"
         android:layout_toEndOf="@+id/Artist"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="182dp"
         android:background="@drawable/btn_shape"
         android:contentDescription="@string/contentDescription7"
         android:src="@drawable/like"
+        tools:ignore="TouchTargetSizeCheck,ImageContrastCheck" />
+
+    <ImageButton
+        android:id="@+id/equalizer"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_toEndOf="@+id/liked"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="182dp"
+        android:background="@drawable/btn_shape"
+        android:contentDescription="@string/contentDescription7"
+        android:src="@drawable/equalizer"
         tools:ignore="TouchTargetSizeCheck,ImageContrastCheck" />
 
 

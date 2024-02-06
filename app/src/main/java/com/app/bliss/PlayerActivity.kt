@@ -5,11 +5,14 @@ import android.content.ComponentName
 import android.content.Intent
 import android.content.ServiceConnection
 import android.media.MediaPlayer
+import android.media.audiofx.AudioEffect
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.IBinder
 import android.text.TextUtils
 import android.widget.SeekBar
+import android.widget.Toast
 import com.app.bliss.databinding.ActivityPlayerBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -67,6 +70,28 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
                 binding.repeat.setBackgroundResource(R.drawable.btn_shape2)
                 binding.repeat.setImageResource(R.drawable.repeatlock)
             }
+        }
+
+        binding.equalizer.setOnClickListener {
+            try{
+                val eqIntent = Intent(AudioEffect.ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL)
+                eqIntent.putExtra(
+                    AudioEffect.EXTRA_AUDIO_SESSION,
+                    musicService!!.mediaPlayer!!.audioSessionId
+                )
+                eqIntent.putExtra(AudioEffect.EXTRA_PACKAGE_NAME, baseContext.packageName)
+                startActivityForResult(eqIntent, 10)
+            }catch (e:Exception){ Toast.makeText(this, " Equalizer Feature Not Supported!", Toast.LENGTH_LONG).show() }
+        }
+
+
+        binding.cover.setOnLongClickListener{
+            val share = Intent()
+            share.action = Intent.ACTION_SEND
+            share.type = "audio/*"
+            share.putExtra(Intent.EXTRA_STREAM, Uri.parse(musicListPA[songPosition].path!!))
+            startActivity(Intent.createChooser(share, "Share your Fav Music with Your Fav Ones!"))
+            true
         }
 
 
@@ -314,17 +339,23 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
                 musicService!!.mediaPlayer!!.start()
                 val playAndPause = binding.play
                 playAndPause.setImageResource(R.drawable.pause)
-                musicService!!.showNotification(R.drawable.pause, "pause")
-                binding.recover.text =
-                    formatDuration(musicService!!.mediaPlayer!!.currentPosition.toLong())
-                binding.covered.text =
-                    formatDuration(musicService!!.mediaPlayer!!.duration.toLong())
+                musicService!!.showNotification(R.drawable.baseline_pause_circle_outline_24, "pause")
+                binding.recover.text = formatDuration(musicService!!.mediaPlayer!!.currentPosition.toLong())
+                binding.covered.text = formatDuration(musicService!!.mediaPlayer!!.duration.toLong())
                 binding.seeking.progress = 0
                 binding.seeking.max = musicService!!.mediaPlayer!!.duration
                 layout()
         }catch (e:Exception){return}
     }
 
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 10 || resultCode == RESULT_OK){
+            binding.equalizer.setBackgroundResource(R.drawable.btn_shape4)
+            return
+        }
+    }
 
 
     private fun createMedia(){
@@ -338,7 +369,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
                     isPlaying = true
                     val playAndPause = binding.play
                     playAndPause.setImageResource(R.drawable.pause)
-                    musicService!!.showNotification(R.drawable.pause, "pause")
+                    musicService!!.showNotification(R.drawable.baseline_pause_circle_outline_24, "pause")
                     binding.recover.text =
                         formatDuration(musicService!!.mediaPlayer!!.currentPosition.toLong())
                     binding.covered.text =
@@ -353,7 +384,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
                     musicService!!.mediaPlayer!!.start()
                     val playAndPause = binding.play
                     playAndPause.setImageResource(R.drawable.pause)
-                    musicService!!.showNotification(R.drawable.pause, "pause")
+                    musicService!!.showNotification(R.drawable.baseline_pause_circle_outline_24, "pause")
                     binding.recover.text = formatDuration(musicService!!.mediaPlayer!!.currentPosition.toLong())
                     binding.covered.text = formatDuration(musicService!!.mediaPlayer!!.duration.toLong())
                     binding.seeking.progress = 0
