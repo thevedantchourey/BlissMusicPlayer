@@ -93,7 +93,7 @@ class MainActivity : AppCompatActivity() {
                                 val intent2 = Intent(this, PlayerActivity::class.java)
                                 intent2.putExtra("index", 0)
                                 intent2.putExtra("class", "shuffle")
-                                startActivity(intent)
+                                startActivity(intent2)
                             }
                             binding.removeAll.setOnClickListener {
                                 val builder = AlertDialog.Builder(this)

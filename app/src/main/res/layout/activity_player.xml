@@ -24,7 +24,7 @@
             android:layout_marginStart="30dp"
             android:background="@drawable/btn_shape"
             android:contentDescription="@string/contentDescription2"
-            android:src="@drawable/backarrow"
+            android:src="@drawable/back_arrow"
             tools:ignore="ImageContrastCheck,DuplicateSpeakableTextCheck" />
 
         <ImageButton

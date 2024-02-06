@@ -181,6 +181,11 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
             binding.liked.setImageResource(R.drawable.like)
             binding.liked.setBackgroundResource(R.drawable.btn_shape)
         }
+        if (isPlaying) {
+            binding.play.setImageResource(R.drawable.pause)
+        } else {
+            binding.play.setImageResource(R.drawable.play)
+        }
     }
 
 
