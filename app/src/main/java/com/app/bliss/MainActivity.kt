@@ -39,37 +39,24 @@ class MainActivity : AppCompatActivity() {
     private var tAG = "MainActivity"
     private var ad = 0
     private lateinit var adapter: MusicPlayerAdapter
+    private var reqCode = 10
 
     companion object{
         var audioList : ArrayList<SongData> = arrayListOf()
         var favList : ArrayList<SongData> = arrayListOf()
         var isClicked: Boolean = false
-
     }
 
-
-    @SuppressLint("NotifyDataSetChanged", "UnsafeIntentLaunch")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-
         if(requestRuntimePermission()) {
-
-            audioList = getAllAudio()
-            audioList = checkPlayList(audioList)
-            var rv = binding.songView
-            rv.layoutManager = GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false)
-            adapter = MusicPlayerAdapter(audioList, this)
-            rv.adapter = adapter
-            adapter.notifyDataSetChanged()
-            adapter.notifyItemChanged(audioList.size)
-            binding.shuffle.visibility = View.INVISIBLE
-            binding.removeAll.visibility = View.INVISIBLE
 
             MobileAds.initialize(this) {
                 loadAd()
             }
+            initialized()
 
             favList = ArrayList()
             val liked = getSharedPreferences("LIKED", MODE_PRIVATE)
@@ -85,29 +72,16 @@ class MainActivity : AppCompatActivity() {
                 binding.fav.setOnClickListener {
                     if (isClicked) {
                         isClicked = false
-                        favList = checkPlayList(favList)
-                        audioList = getAllAudio()
-                        rv = binding.songView
-                        rv.layoutManager =
-                            GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false)
-                        adapter = MusicPlayerAdapter(audioList, this)
-                        rv.adapter = adapter
-                        adapter.notifyDataSetChanged()
-                        adapter.notifyItemChanged(audioList.size)
-                        binding.shuffle.visibility = View.INVISIBLE
-                        binding.removeAll.visibility = View.INVISIBLE
-                        binding.msg.isVisible = false
-                        binding.head.isVisible = true
+                        initialized()
                     } else {
                         isClicked = true
                         favList = checkPlayList(favList)
-                        rv = binding.songView
-                        rv.layoutManager =
-                            GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false)
-                        adapter = MusicPlayerAdapter(favList, this)
-                        adapter.notifyItemChanged(favList.size)
-                        adapter.notifyItemRangeChanged(PlayerActivity.fIndex, favList.size)
-                        rv.adapter = adapter
+                        val rv = binding.songView
+                        rv.layoutManager = GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false)
+                        val adapter2 = MusicPlayerAdapter(favList, this)
+                        adapter2.notifyItemChanged(favList.size)
+                        adapter2.notifyItemRangeChanged(PlayerActivity.fIndex, favList.size)
+                        rv.adapter = adapter2
                         if (favList.size == 0) {
                             binding.msg.isVisible = true
                             binding.head.isVisible = false
@@ -153,6 +127,21 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    private fun initialized(){
+        val rv = binding.songView
+        audioList = getAllAudio()
+        audioList = checkPlayList(audioList)
+        rv.layoutManager = GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false)
+        adapter = MusicPlayerAdapter(audioList, this)
+        rv.adapter = adapter
+        adapter.notifyDataSetChanged()
+        adapter.notifyItemChanged(audioList.size)
+        binding.shuffle.visibility = View.INVISIBLE
+        binding.removeAll.visibility = View.INVISIBLE
+        binding.msg.isVisible = false
+        binding.head.isVisible = true
+
+    }
 
     private fun getAllAudio():ArrayList<SongData>{
 
@@ -268,15 +257,13 @@ class MainActivity : AppCompatActivity() {
         if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     android.Manifest.permission.READ_EXTERNAL_STORAGE)){
-                ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE,android.Manifest.permission.READ_MEDIA_AUDIO,android.Manifest.permission.POST_NOTIFICATIONS), 10)
+                ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE,android.Manifest.permission.READ_MEDIA_AUDIO,android.Manifest.permission.POST_NOTIFICATIONS), reqCode)
             } else{
-                ActivityCompat.requestPermissions(this,  arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE,android.Manifest.permission.READ_MEDIA_AUDIO,android.Manifest.permission.POST_NOTIFICATIONS), 10)
+                ActivityCompat.requestPermissions(this,  arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE,android.Manifest.permission.READ_MEDIA_AUDIO,android.Manifest.permission.POST_NOTIFICATIONS), reqCode)
             }
         }
     return true
     }
-
-//
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -284,14 +271,10 @@ class MainActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if(requestCode == 10){
+        if(requestCode == reqCode){
             if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show()
-                audioList = getAllAudio()
-                val rv = binding.songView
-                rv.layoutManager = GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false)
-                val adapter = MusicPlayerAdapter(audioList, this)
-                rv.adapter = adapter
+                initialized()
             }
             else{
                 requestRuntimePermission()

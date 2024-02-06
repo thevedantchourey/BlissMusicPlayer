@@ -51,7 +51,7 @@ fun songPst(increment: Boolean) {
 
 fun favouriteCheck(id: String): Int{
     PlayerActivity.isFavourite = false
-    MainActivity.favList!!.forEachIndexed{ index, songData ->
+    MainActivity.favList.forEachIndexed{ index, songData ->
         if (id == songData.id){
             PlayerActivity.isFavourite = true
             return index
