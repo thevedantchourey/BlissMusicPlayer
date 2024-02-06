@@ -11,7 +11,7 @@ data class SongData (
     val albumCover: String?,
     val path: String?,
     val duration: Long = 0,
-    val id: String?
+    val id: String
 )
 
 
@@ -49,9 +49,9 @@ fun songPst(increment: Boolean) {
 }
 
 
-fun favouriteCheck(id: String?): Int{
+fun favouriteCheck(id: String): Int{
     PlayerActivity.isFavourite = false
-    MainActivity.favList.forEachIndexed{ index, songData ->
+    MainActivity.favList!!.forEachIndexed{ index, songData ->
         if (id == songData.id){
             PlayerActivity.isFavourite = true
             return index

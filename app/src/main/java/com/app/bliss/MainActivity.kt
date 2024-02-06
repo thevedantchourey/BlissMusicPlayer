@@ -11,6 +11,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
@@ -41,24 +42,20 @@ class MainActivity : AppCompatActivity() {
 
     companion object{
         var audioList : ArrayList<SongData> = arrayListOf()
-        var favList : ArrayList<SongData> = ArrayList()
+        var favList : ArrayList<SongData> = arrayListOf()
         var isClicked: Boolean = false
 
     }
 
 
-    @SuppressLint("NotifyDataSetChanged")
+    @SuppressLint("NotifyDataSetChanged", "UnsafeIntentLaunch")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
 
         if(requestRuntimePermission()) {
-            MobileAds.initialize(this) {
-                loadAd()
-            }
 
-            binding.shuffle.visibility = View.INVISIBLE
             audioList = getAllAudio()
             audioList = checkPlayList(audioList)
             var rv = binding.songView
@@ -67,7 +64,14 @@ class MainActivity : AppCompatActivity() {
             rv.adapter = adapter
             adapter.notifyDataSetChanged()
             adapter.notifyItemChanged(audioList.size)
+            binding.shuffle.visibility = View.INVISIBLE
+            binding.removeAll.visibility = View.INVISIBLE
 
+            MobileAds.initialize(this) {
+                loadAd()
+            }
+
+            favList = ArrayList()
             val liked = getSharedPreferences("LIKED", MODE_PRIVATE)
             val jsonString = liked.getString("LikedSongs", null)
             val typeToken = object : TypeToken<ArrayList<SongData>>(){}.type
@@ -76,48 +80,75 @@ class MainActivity : AppCompatActivity() {
                 favList.addAll(data)
             }
 
-            binding.fav.setOnClickListener{
-                if (isClicked){
-                    isClicked = false
-                    favList = checkPlayList(favList)
-                    audioList = getAllAudio()
-                    rv = binding.songView
-                    rv.layoutManager = GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false)
-                    adapter = MusicPlayerAdapter(audioList, this)
-                    rv.adapter = adapter
-                    adapter.notifyDataSetChanged()
-                    adapter.notifyItemChanged(audioList.size)
-                    binding.shuffle.visibility = View.INVISIBLE
-                    binding.msg.isVisible = false
-                    binding.head.isVisible = true
-                }else{
-                    isClicked = true
-                    favList = checkPlayList(favList)
-                    rv = binding.songView
-                    rv.layoutManager = GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false)
-                    adapter = MusicPlayerAdapter(favList, this)
-                    rv.adapter = adapter
-                    adapter.notifyItemChanged(favList.size)
-                    adapter.notifyItemRangeChanged(PlayerActivity.fIndex, favList.size)
-                    if(favList.size == 0){
-                        binding.msg.isVisible = true
-                        binding.head.isVisible = false
-                    }
-                    if(favList.size>1){
-                        binding.shuffle.visibility = View.VISIBLE
-                        binding.shuffle.setOnClickListener{
-                            val intent2 = Intent(this, PlayerActivity::class.java)
-                            intent2.putExtra("index", 0)
-                            intent2 .putExtra("class", "shuffle")
-                            startActivity(intent)
+
+            try{
+                binding.fav.setOnClickListener {
+                    if (isClicked) {
+                        isClicked = false
+                        favList = checkPlayList(favList)
+                        audioList = getAllAudio()
+                        rv = binding.songView
+                        rv.layoutManager =
+                            GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false)
+                        adapter = MusicPlayerAdapter(audioList, this)
+                        rv.adapter = adapter
+                        adapter.notifyDataSetChanged()
+                        adapter.notifyItemChanged(audioList.size)
+                        binding.shuffle.visibility = View.INVISIBLE
+                        binding.removeAll.visibility = View.INVISIBLE
+                        binding.msg.isVisible = false
+                        binding.head.isVisible = true
+                    } else {
+                        isClicked = true
+                        favList = checkPlayList(favList)
+                        rv = binding.songView
+                        rv.layoutManager =
+                            GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false)
+                        adapter = MusicPlayerAdapter(favList, this)
+                        adapter.notifyItemChanged(favList.size)
+                        adapter.notifyItemRangeChanged(PlayerActivity.fIndex, favList.size)
+                        rv.adapter = adapter
+                        if (favList.size == 0) {
+                            binding.msg.isVisible = true
+                            binding.head.isVisible = false
+                        }
+                        if (favList.size > 1) {
+                            binding.shuffle.visibility = View.VISIBLE
+                            binding.removeAll.visibility = View.VISIBLE
+                            binding.shuffle.setOnClickListener {
+                                val intent2 = Intent(this, PlayerActivity::class.java)
+                                intent2.putExtra("index", 0)
+                                intent2.putExtra("class", "shuffle")
+                                startActivity(intent)
+                            }
+                            binding.removeAll.setOnClickListener {
+                                val builder = AlertDialog.Builder(this)
+
+                                builder.setTitle("Warning")
+                                builder.setMessage("All liked songs will be removed on next start!")
+                                builder.setIcon(android.R.drawable.ic_dialog_alert)
+
+                                builder.setPositiveButton("OK") { _, _ ->
+                                    favList.removeAll(favList.toSet())
+                                }
+
+                                builder.setNegativeButton("Cancel") { dialog, _ ->
+                                    dialog.dismiss()
+                                }
+
+                                val dialog = builder.create()
+                                dialog.show()
+                            }
+
+                        }
+                        ad++
+                        if (ad > 3) {
+                            adsInitialization()
+                            ad = 1
                         }
                     }
-                    ad++
-                    if (ad >= 3){
-                        adsInitialization()
-                    }
                 }
-            }
+            }catch (e:Exception){ return }
         }
     }
 

@@ -156,7 +156,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
 
 
     private fun layout(){
-        fIndex = favouriteCheck(musicListPA[songPosition].id!!)
+        fIndex = favouriteCheck(musicListPA[songPosition].id)
         val songName = binding.songName
         val artist = binding.Artist
         val cover = binding.albumArt
