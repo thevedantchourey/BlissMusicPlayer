@@ -1176,6 +1176,7 @@
         <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
           data-tag="font" />
+      </head>
 
       <body>
         <div>
@@ -1218,18 +1219,18 @@
                 </a>
                 <span class="finalisedpanel-text11"><span>License:</span></span>
                 <span class="finalisedpanel-text13">
-                  <span class="finalisedpanel-text14">is</span>
+                  <span class="finalisedpanel-text14">is&nbsp;</span>
                   <span class="finalisedpanel-text15">Free Software</span>
                   <span class="finalisedpanel-text16">
                     : You can use, study, share and modify it at your will. The app
                     can be redistributed and/or modified under the terms of
-                    the;
+                    the&nbsp;
                   </span>
                   <span class="finalisedpanel-text17">
                     GNU General Public License version 3 or later
                   </span>
                   <span class="finalisedpanel-text18">
-                    published by the;
+                    &nbsp;published by the&nbsp;
                   </span>
                   <span class="finalisedpanel-text19">
                     Free Software Foundation.
