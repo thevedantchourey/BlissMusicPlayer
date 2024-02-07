@@ -1218,18 +1218,18 @@
                 </a>
                 <span class="finalisedpanel-text11"><span>License:</span></span>
                 <span class="finalisedpanel-text13">
-                  <span class="finalisedpanel-text14">is&nbsp;</span>
+                  <span class="finalisedpanel-text14">is</span>
                   <span class="finalisedpanel-text15">Free Software</span>
                   <span class="finalisedpanel-text16">
                     : You can use, study, share and modify it at your will. The app
                     can be redistributed and/or modified under the terms of
-                    the&nbsp;
+                    the;
                   </span>
                   <span class="finalisedpanel-text17">
                     GNU General Public License version 3 or later
                   </span>
                   <span class="finalisedpanel-text18">
-                    &nbsp;published by the&nbsp;
+                    published by the;
                   </span>
                   <span class="finalisedpanel-text19">
                     Free Software Foundation.
@@ -1461,6 +1461,7 @@
             </div>
           </div>
         </div>
+      </body>
     </div>
   </foreignObject>
 </svg>
