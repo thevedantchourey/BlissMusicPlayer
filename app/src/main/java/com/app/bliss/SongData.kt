@@ -63,10 +63,10 @@ fun favouriteCheck(id: String): Int{
 
 fun checkPlayList(playlist: ArrayList<SongData>):ArrayList<SongData>{
 
-    playlist.forEachIndexed{index, songData ->
-        val file = File(songData.path!!)
-        if (!file.exists()){
-            playlist.removeAt(index)
+    playlist.forEachIndexed{_, songData ->
+        val file = File(songData.path ?: "")
+        if (!file.exists()) {
+            playlist.remove(songData)
         }
     }
 

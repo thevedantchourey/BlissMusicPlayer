@@ -61,8 +61,10 @@ class NowPlaying : Fragment() {
                 }
                 if (PlayerActivity.isPlaying) {
                     binding.play.setImageResource(R.drawable.pause)
+                    PlayerActivity.binding.play.setPadding(0,0,0,0)
                 } else {
                     binding.play.setImageResource(R.drawable.play)
+                    PlayerActivity.binding.play.setPadding(5,0,0,0)
                 }
                 binding.play.setOnClickListener {
                     if (PlayerActivity.isPlaying) { pause() } else { play() }
@@ -79,6 +81,7 @@ class NowPlaying : Fragment() {
         PlayerActivity.binding.play.setImageResource(R.drawable.pause)
         PlayerActivity.musicService!!.showNotification(R.drawable.pause,"pause")
         PlayerActivity.isPlaying = true
+        PlayerActivity.binding.play.setPadding(0,0,0,0)
         PlayerActivity.musicService!!.mediaPlayer!!.start()
     }
 
@@ -86,6 +89,7 @@ class NowPlaying : Fragment() {
         PlayerActivity.binding.play.setImageResource(R.drawable.play)
         PlayerActivity.musicService!!.showNotification(R.drawable.play,"play")
         PlayerActivity.isPlaying = false
+        PlayerActivity.binding.play.setPadding(5,0,0,0)
         PlayerActivity.musicService!!.mediaPlayer!!.pause()
     }
 

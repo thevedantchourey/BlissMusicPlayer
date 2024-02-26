@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingTop="30dp"
+    android:paddingStart="8dp"
+    android:paddingEnd="0dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/card"
+        android:layout_width="190dp"
+        android:layout_height="225dp"
+        android:gravity="center_vertical"
+        android:background="@drawable/btn_shape3"
+        tools:ignore="UselessParent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/imageCard"
+            android:layout_width="160dp"
+            android:layout_height="170dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/albumCover"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/contentDescription"
+                android:scaleType="centerCrop"
+                android:src="@drawable/tu_chodiyona" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/songName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:maxLines="1"
+            android:maxLength="18"
+            android:paddingStart="10dp"
+            android:paddingEnd="20dp"
+            android:text="@string/song_name"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+<!--        <ImageView-->
+<!--            android:layout_width="10dp"-->
+<!--            android:layout_height="20dp"-->
+<!--            android:layout_marginTop="11dp"-->
+<!--            android:layout_marginStart="135dp"-->
+<!--            android:src="@drawable/play"-->
+<!--            app:tint="#7ac2bb"-->
+<!--            />-->
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginStart="140dp"
+            android:src="@drawable/audio_waves"
+            />
+
+
+<!--        <TextView-->
+<!--            android:id="@+id/artist"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_marginTop="120dp"-->
+<!--            android:ellipsize="end"-->
+<!--            android:fontFamily="@font/josefinsans_regular"-->
+<!--            android:gravity="center"-->
+<!--            android:text="@string/artist"-->
+<!--            android:textColor="#b3b3b3"-->
+<!--            android:textSize="12sp"-->
+<!--            android:textStyle="bold" />-->
+
+        <TextView
+            android:id="@+id/duration"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="26dp"
+            android:gravity="start"
+            android:layout_marginStart="12dp"
+            android:fontFamily="@font/josefinsans_regular"
+            android:text="@string/duration"
+            android:textColor="@color/black"
+            android:textSize="9sp" />
+    </RelativeLayout>
+</RelativeLayout>

@@ -13,6 +13,7 @@ import android.os.IBinder
 import android.text.TextUtils
 import android.widget.SeekBar
 import android.widget.Toast
+import androidx.core.view.marginStart
 import com.app.bliss.databinding.ActivityPlayerBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -54,6 +55,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
                     isFavourite = true
                     binding.liked.setImageResource(R.drawable.liked)
                     binding.liked.setBackgroundResource(R.drawable.btn_shape4)
+                    binding.play.setPadding(0,0,0,0)
                     MainActivity.favList.add(musicListPA[songPosition])
                 }
         }
@@ -135,8 +137,10 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
                 musicService!!.mediaPlayer!!.setOnCompletionListener(this)
                 if (isPlaying) {
                     binding.play.setImageResource(R.drawable.pause)
+                    binding.play.setPadding(0,0,0,0)
                 } else {
                     binding.play.setImageResource(R.drawable.play)
+                    binding.play.setPadding(5,0,0,0)
                 }
                 layout()
             }
@@ -177,14 +181,17 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
         if (isFavourite) {
             binding.liked.setImageResource(R.drawable.liked)
             binding.liked.setBackgroundResource(R.drawable.btn_shape4)
+            binding.play.setPadding(0,0,0,0)
         } else {
             binding.liked.setImageResource(R.drawable.like)
             binding.liked.setBackgroundResource(R.drawable.btn_shape)
         }
         if (isPlaying) {
             binding.play.setImageResource(R.drawable.pause)
+            binding.play.setPadding(0,0,0,0)
         } else {
             binding.play.setImageResource(R.drawable.play)
+            binding.play.setPadding(5,0,0,0)
         }
     }
 
@@ -193,6 +200,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
         binding.play.setImageResource(R.drawable.pause)
         musicService!!.showNotification(R.drawable.baseline_pause_circle_outline_24,"pause")
         isPlaying = true
+        binding.play.setPadding(0,0,0,0)
         musicService!!.mediaPlayer!!.start()
     }
 
@@ -200,6 +208,7 @@ class PlayerActivity : AppCompatActivity(), ServiceConnection, MediaPlayer.OnCom
         binding.play.setImageResource(R.drawable.play)
         musicService!!.showNotification(R.drawable.baseline_play_circle_outline_24,"play")
         isPlaying = false
+        binding.play.setPadding(5,0,0,0)
         musicService!!.mediaPlayer!!.pause()
     }
 
