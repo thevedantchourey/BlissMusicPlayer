@@ -2,16 +2,12 @@ package com.app.bliss
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.PorterDuff
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.bliss.databinding.ListStyle2Binding
-//import com.app.bliss.databinding.ListStyleBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import java.util.Random
 
 class MusicPlayerAdapter(audios: ArrayList<SongData>, private val  context: Context) : RecyclerView.Adapter<PlayerViewHolder>() {
 
@@ -27,10 +23,8 @@ class MusicPlayerAdapter(audios: ArrayList<SongData>, private val  context: Cont
     }
 
     override fun onBindViewHolder(holder: PlayerViewHolder, position: Int) {
-        val randomColor = getRandomColor()
         val audioModel : SongData = audio[position]
         holder.title.text = audioModel.title
-//        holder.artist.text = audioModel.artist
         holder.duration.text = formatDuration(audio[position].duration)
         Glide.with(context).load(audioModel.albumCover)
             .apply(RequestOptions().placeholder(R.drawable.bliss_icon).centerCrop()).into(holder.cover)
@@ -40,13 +34,8 @@ class MusicPlayerAdapter(audios: ArrayList<SongData>, private val  context: Cont
             intent.putExtra("class","MusicPlayerAdapter")
             context.startActivity(intent)
         }
-//        holder.card.background.setColorFilter(randomColor, PorterDuff.Mode.SRC_ATOP)
     }
 
-    private fun getRandomColor(): Int {
-        val random = Random()
-        return Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256))
-    }
     override fun getItemCount(): Int {
         return audio.size
     }
@@ -55,10 +44,8 @@ class MusicPlayerAdapter(audios: ArrayList<SongData>, private val  context: Cont
 }
 class PlayerViewHolder(binding: ListStyle2Binding): RecyclerView.ViewHolder(binding.root) {
     val title = binding.songName
-//    val artist = binding.artist
     val cover = binding.albumCover
     val duration = binding.duration
-    val card = binding.card
     val root = binding.root
 }
 
